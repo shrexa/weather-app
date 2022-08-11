@@ -1,0 +1,6 @@
+#parralax_effect {
+    background-image: url(https://images.unsplash.com/photo-1530318271774-4f2cb0d1fda1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80);
+    background-size: cover;
+    /* background-attachment: fixed; */
+    background-repeat: no-repeat;
+}
