@@ -37,6 +37,11 @@
 
 const url = 'https://openweathermap.org/data/2.5/weather?id=2643743&appid=439d4b804bc8187953eb36d2a8c26a02';
 
+const images = {
+    hot: 'hot_bg',
+    normal: 'normal_bg',
+    cold: 'cold_bg'
+}
 
 
 getWeatherDataTableRow = (key, value) => {
@@ -46,6 +51,21 @@ getWeatherDataTableRow = (key, value) => {
             <td>${value}</td>
         </tr>
     `
+}
+
+const changeAppBg = (temp) => {
+    if(!temp || typeof temp !== 'number') return;
+
+    const BG_CONTAINER = document.getElementById('parralax_effect');
+    let new_image = images.normal;
+
+    if(temp < 10) {
+        new_image = images.cold;
+    } else if(temp > 30) {
+        new_image = images.hot;
+    }
+
+    BG_CONTAINER.classList.add(new_image);
 }
 
 const processWeatherDataUIChanges = (data) => {
@@ -62,6 +82,7 @@ const processWeatherDataUIChanges = (data) => {
     table_rows_obj['Pressure'] = data.main.pressure;
     table_rows_obj['Wind Speed'] = data.wind.speed;
 
+    changeAppBg(table_rows_obj.Temperature);
     let processedHTML = ``;
     
     for(const key in table_rows_obj) {
@@ -94,8 +115,6 @@ const getWeatherData = () => {
     )
     .then(
         (parsedData) => {
-
-            console.log(parsedData)
             processWeatherDataUIChanges(parsedData);
         }
     )
